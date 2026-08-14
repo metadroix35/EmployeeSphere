@@ -37,9 +37,10 @@ export function EmployeeList() {
       setTotalPages(paged.totalPages);
       setTotalElements(paged.totalElements);
     } catch {
-      setEmployees(DUMMY_EMPLOYEES.filter(emp => emp.firstName.toLowerCase().includes(search.toLowerCase()) || emp.lastName.toLowerCase().includes(search.toLowerCase()) || emp.postName.toLowerCase().includes(search.toLowerCase())));
+      const filtered = DUMMY_EMPLOYEES.filter(emp => emp.firstName.toLowerCase().includes(search.toLowerCase()) || emp.lastName.toLowerCase().includes(search.toLowerCase()) || emp.postName.toLowerCase().includes(search.toLowerCase()));
+      setEmployees(filtered);
       setTotalPages(1);
-      setTotalElements(DUMMY_EMPLOYEES.length);
+      setTotalElements(filtered.length);
     } finally {
       setLoading(false);
     }
