@@ -1,11 +1,9 @@
 import { Moon, Sun, Menu, Bell } from "lucide-react";
 import { useThemeStore } from "@/store/useThemeStore";
-import { useAuthStore } from "@/store/useAuthStore";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const { theme, setTheme } = useThemeStore();
-  const user = useAuthStore((state) => state.user);
 
   return (
     <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b bg-background/80 backdrop-blur-md px-4 sm:gap-x-6 sm:px-6 lg:px-8">
@@ -39,12 +37,12 @@ export function Navbar() {
             <div className="flex items-center gap-x-3">
               <img
                 className="h-8 w-8 rounded-full bg-muted object-cover"
-                src={`https://ui-avatars.com/api/?name=${user?.name || "Admin"}&background=random`}
+                src={`https://ui-avatars.com/api/?name=Administrator&background=random`}
                 alt="Avatar"
               />
               <span className="hidden lg:flex lg:items-center">
                 <span className="text-sm font-semibold leading-6 text-foreground" aria-hidden="true">
-                  {user?.name || "Administrator"}
+                  Administrator
                 </span>
               </span>
             </div>

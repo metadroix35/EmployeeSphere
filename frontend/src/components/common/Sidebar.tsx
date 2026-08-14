@@ -7,9 +7,7 @@ import {
   CalendarCheck,
   CreditCard,
   Settings,
-  LogOut,
 } from "lucide-react";
-import { useAuthStore } from "@/store/useAuthStore";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -22,7 +20,6 @@ const navigation = [
 
 export function Sidebar() {
   const location = useLocation();
-  const logout = useAuthStore((state) => state.logout);
 
   return (
     <div className="hidden border-r bg-muted/20 md:flex md:w-64 md:flex-col fixed inset-y-0 z-50">
@@ -57,14 +54,6 @@ export function Sidebar() {
             );
           })}
         </nav>
-        <div className="mt-auto pb-4">
-          <button
-            onClick={() => logout()}
-            className="group flex w-full items-center px-3 py-2.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
-          >
-            <LogOut className="mr-3 h-5 w-5 shrink-0 text-muted-foreground group-hover:text-destructive" />
-            Logout
-          </button>
         </div>
       </div>
     </div>

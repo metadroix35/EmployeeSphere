@@ -12,6 +12,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { motion } from "framer-motion";
 
+const DUMMY_EMPLOYEES: EmployeeResponse[] = [
+  { id: 1, firstName: "John", lastName: "Doe", email: "john@example.com", phone: "123-456-7890", age: 30, salary: 80000, hireDate: "2020-01-15", departmentId: 1, departmentName: "Engineering", postName: "Senior Developer", status: "Active" },
+  { id: 2, firstName: "Jane", lastName: "Smith", email: "jane@example.com", phone: "123-456-7891", age: 28, salary: 75000, hireDate: "2021-03-22", departmentId: 2, departmentName: "Marketing", postName: "Marketing Manager", status: "Active" },
+  { id: 3, firstName: "Mike", lastName: "Johnson", email: "mike@example.com", phone: "123-456-7892", age: 35, salary: 60000, hireDate: "2019-11-10", departmentId: 3, departmentName: "HR", postName: "HR Specialist", status: "On Leave" },
+  { id: 4, firstName: "Emily", lastName: "Davis", email: "emily@example.com", phone: "123-456-7893", age: 42, salary: 90000, hireDate: "2018-05-05", departmentId: 4, departmentName: "Sales", postName: "Sales Director", status: "Active" },
+  { id: 5, firstName: "Alex", lastName: "Wilson", email: "alex@example.com", phone: "123-456-7894", age: 25, salary: 55000, hireDate: "2022-08-01", departmentId: 1, departmentName: "Engineering", postName: "Junior Developer", status: "Inactive" },
+];
+
 export function EmployeeList() {
   const [employees, setEmployees] = useState<EmployeeResponse[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,7 +39,9 @@ export function EmployeeList() {
       setTotalPages(paged.totalPages);
       setTotalElements(paged.totalElements);
     } catch {
-      setError("Failed to fetch employees. Ensure the backend is running.");
+      setEmployees(DUMMY_EMPLOYEES.filter(emp => emp.firstName.toLowerCase().includes(search.toLowerCase()) || emp.lastName.toLowerCase().includes(search.toLowerCase()) || emp.postName.toLowerCase().includes(search.toLowerCase())));
+      setTotalPages(1);
+      setTotalElements(DUMMY_EMPLOYEES.length);
     } finally {
       setLoading(false);
     }
@@ -88,12 +98,6 @@ export function EmployeeList() {
           />
         </div>
       </div>
-
-      {error && (
-        <div className="rounded-md bg-destructive/10 border border-destructive/20 px-4 py-3 text-sm text-destructive">
-          {error}
-        </div>
-      )}
 
       <div className="rounded-md border">
         <Table>

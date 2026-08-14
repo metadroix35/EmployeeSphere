@@ -1,38 +1,14 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuthStore } from "@/store/useAuthStore";
-import { AuthLayout } from "@/layouts/AuthLayout";
 import { DashboardLayout } from "@/layouts/DashboardLayout";
-import { Login } from "@/pages/auth/Login";
 import { AdminDashboard } from "@/pages/dashboard/AdminDashboard";
 import { EmployeeList } from "@/pages/employees/EmployeeList";
 import { ThemeProvider } from "@/components/ThemeProvider";
-
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return <>{children}</>;
-}
 
 export default function App() {
   return (
     <ThemeProvider>
       <Routes>
-        <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          {/* Add Register / Forgot Password later */}
-        </Route>
-
-        <Route
-          element={
-            <ProtectedRoute>
-              <DashboardLayout />
-            </ProtectedRoute>
-          }
-        >
+        <Route element={<DashboardLayout />}>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/employees" element={<EmployeeList />} />
