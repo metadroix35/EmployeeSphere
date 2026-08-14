@@ -39,7 +39,6 @@ const DUMMY_METRICS: DashboardMetrics = {
 export function AdminDashboard() {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     dashboardApi.getMetrics()
@@ -53,9 +52,6 @@ export function AdminDashboard() {
       <div className="flex h-[60vh] items-center justify-center">
         <Loader2 className="h-10 w-10 animate-spin text-primary" />
       </div>
-    );
-  }
-
     );
   }
 
